@@ -9,7 +9,6 @@ public class Game {
         Player dealer = new Player(d.giveCard(2));
         Player p = new Player(d.giveCard(2));
         
-       // PROBLEM: Game ends *before* the last round is played.
         do {
             System.out.println("The dealer's card is "+getCard(dealer.getHand(0))+" [Value: "+dealer.getCardValue(dealer.getHand(0))+"]");
             try {Thread.sleep(500);} catch(InterruptedException e){}
@@ -65,6 +64,7 @@ public class Game {
         System.out.println("Dealer: "+dealer.getScore());
         System.out.println("You: "+p.getScore());
     }
+    
     private static String getCard(int n) {
         String name = "";
         switch((n % 52) % 13) {

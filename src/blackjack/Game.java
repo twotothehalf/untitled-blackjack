@@ -13,6 +13,7 @@ public class Game {
             System.out.println("The dealer's card is "+getCard(dealer.getHand(0))+" [Value: "+dealer.getCardValue(dealer.getHand(0))+"]");
             try {Thread.sleep(500);} catch(InterruptedException e){}
             System.out.println("Your hand is "+Arrays.toString(p.getHandName())+" [Value: "+p.getHandValue()+"]");
+            try {Thread.sleep(500);} catch(InterruptedException e){}
             String choice;
             boolean isStand = false;
             // choice loop: repeat until player calls stand.

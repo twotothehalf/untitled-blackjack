@@ -50,7 +50,7 @@ public class Betting {
         }
     }
     
-    public void winBet(String who) {
+    public void winRound(String who) {
         if(who == "player") {
              this.playerMoney += this.currentBetPlayer;
              this.dealerMoney -= this.currentBetPlayer;

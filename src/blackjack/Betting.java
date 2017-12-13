@@ -3,8 +3,9 @@ package blackjack;
 public class Betting {
     private double dealerMoney;
     private double playerMoney;
-    private double currentBetDealer;
-    private double currentBetPlayer;
+    private double dealerHandBet;
+    private double playerHandBetOne;
+    private double playerHandBetTwo;
 
     public double getDealerMoney() {
         return dealerMoney;
@@ -22,22 +23,29 @@ public class Betting {
         this.playerMoney = playerMoney;
     }
 
-    public double getCurrentBetDealer() {
-        return currentBetDealer;
+    public double getDealerHandBet() {
+        return dealerHandBet;
     }
 
-    public void setCurrentBetDealer(double currentBetDealer) {
-        this.currentBetDealer = currentBetDealer;
+    public void setDealerHandBet(double dealerHandBet) {
+        this.dealerHandBet = dealerHandBet;
     }
 
-    public double getCurrentBetPlayer() {
-        return currentBetPlayer;
+    public double getPlayerHandBetOne() {
+        return playerHandBetOne;
     }
 
-    public void setCurrentBetPlayer(double currentBetPlayer) {
-        this.currentBetPlayer = currentBetPlayer;
+    public void setPlayerHandBetOne(double playerHandBetOne) {
+        this.playerHandBetOne = playerHandBetOne;
     }
-    
+
+    public double getPlayerHandBetTwo() {
+        return playerHandBetTwo;
+    }
+
+    public void setPlayerHandBetTwo(double playerHandBetTwo) {
+        this.playerHandBetTwo = playerHandBetTwo;
+    }
     
     public boolean isBettable(int betAmount, String who) {
         if(who == "player") {
@@ -50,16 +58,20 @@ public class Betting {
         }
     }
     
-    public void winRound(String who) {
-        if(who == "player") {
-             this.playerMoney += this.currentBetPlayer;
-             this.dealerMoney -= this.currentBetPlayer;
-        } else if (who == "dealer") {
-             this.dealerMoney += this.currentBetDealer;
-             this.playerMoney -= this.currentBetDealer;
+    public void winRound(String hand) {
+        if(hand.equalsIgnoreCase("playerOne")) {
+             this.playerMoney += this.playerHandBetOne;
+             this.dealerMoney -= this.playerHandBetOne;
+        } else if(hand.equalsIgnoreCase("playerTwo")) {
+             this.playerMoney += this.playerHandBetTwo;
+             this.dealerMoney -= this.playerHandBetTwo;
+        } else if (hand.equalsIgnoreCase("dealer")) {
+             this.dealerMoney += this.dealerHandBet;
+             this.playerMoney -= this.dealerHandBet;
         }
         
-        this.currentBetPlayer = 0.0;
-        this.currentBetDealer = 0.0;
+        this.playerHandBetOne = 0.0;
+        this.playerHandBetTwo = 0.0;
+        this.dealerHandBet = 0.0;
     }
 }

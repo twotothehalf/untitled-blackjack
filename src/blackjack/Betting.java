@@ -4,8 +4,8 @@ public class Betting {
     private double dealerMoney;
     private double playerMoney;
     private double dealerHandBet;
-    private double playerHandBetOne;
-    private double playerHandBetTwo;
+    private double playerHandOneBet;
+    private double playerHandTwoBet;
 
     public double getDealerMoney() {
         return dealerMoney;
@@ -31,20 +31,20 @@ public class Betting {
         this.dealerHandBet = dealerHandBet;
     }
 
-    public double getPlayerHandBetOne() {
-        return playerHandBetOne;
+    public double getPlayerHandOneBet() {
+        return playerHandOneBet;
     }
 
-    public void setPlayerHandBetOne(double playerHandBetOne) {
-        this.playerHandBetOne = playerHandBetOne;
+    public void setPlayerHandOneBet(double playerHandOneBet) {
+        this.playerHandOneBet = playerHandOneBet;
     }
 
-    public double getPlayerHandBetTwo() {
-        return playerHandBetTwo;
+    public double getPlayerHandTwoBet() {
+        return playerHandTwoBet;
     }
 
-    public void setPlayerHandBetTwo(double playerHandBetTwo) {
-        this.playerHandBetTwo = playerHandBetTwo;
+    public void setPlayerHandTwoBet(double playerHandTwoBet) {
+        this.playerHandTwoBet = playerHandTwoBet;
     }
     
     public boolean isBettable(int betAmount, String who) {
@@ -60,18 +60,23 @@ public class Betting {
     
     public void winRound(String hand) {
         if(hand.equalsIgnoreCase("playerOne")) {
-             this.playerMoney += this.playerHandBetOne;
-             this.dealerMoney -= this.playerHandBetOne;
+             this.playerMoney += this.playerHandOneBet;
+             this.dealerMoney -= this.playerHandOneBet;
         } else if(hand.equalsIgnoreCase("playerTwo")) {
-             this.playerMoney += this.playerHandBetTwo;
-             this.dealerMoney -= this.playerHandBetTwo;
+             this.playerMoney += this.playerHandTwoBet;
+             this.dealerMoney -= this.playerHandTwoBet;
         } else if (hand.equalsIgnoreCase("dealer")) {
              this.dealerMoney += this.dealerHandBet;
              this.playerMoney -= this.dealerHandBet;
         }
         
-        this.playerHandBetOne = 0.0;
-        this.playerHandBetTwo = 0.0;
+        this.playerHandOneBet = 0.0;
+        this.playerHandTwoBet = 0.0;
         this.dealerHandBet = 0.0;
     }
+
+    @Override
+    public String toString() {
+        return "Betting{" + "dealerMoney=" + dealerMoney + ", playerMoney=" + playerMoney + '}';
+    }    
 }

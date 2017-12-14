@@ -2,6 +2,8 @@ package blackjack;
 public class Player {
     private int[] hand;
     private int score;
+    private String name;
+    
     public Player(int[] card) {
         this.hand = card;
         this.score = 0;
@@ -77,4 +79,14 @@ public class Player {
     public void addScore(int p) {
         this.score += p;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
 }

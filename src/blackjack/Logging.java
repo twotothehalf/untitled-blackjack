@@ -20,9 +20,10 @@ public class Logging {
     public void saveFile(String data) {
         try {
             pw.write(data);
-            pw.close();
         } catch(Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            pw.close();
         }
     }
     
@@ -33,6 +34,8 @@ public class Logging {
             }
         } catch(Exception e) {
             System.out.println(e.getMessage());
+        } finally {
+            s.close();
         }
     }
 }

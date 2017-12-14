@@ -17,6 +17,15 @@ public class Player {
     public int[] getHand() {
         return this.hand;
     }
+    
+    public void setHand(int i, int hand) {
+        this.hand[i] = hand;
+    }
+    
+    public void setHand(int[] hand) {
+        this.hand = hand;
+    }
+    
     public String[] getHandName() {
         String[] name = new String[this.hand.length];
         for (int i=0; i<this.hand.length; i++) {

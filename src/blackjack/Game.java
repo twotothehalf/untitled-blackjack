@@ -1,19 +1,22 @@
 package blackjack;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
 public class Game {
     static Deck d = new Deck();
     static Scanner s = new Scanner(System.in);
     static Player dealer = new Player(d.giveCard(2));
     static Player p = new Player(d.giveCard(2));
     static Betting bet = new Betting();
+    static Random r = new Random();
         
     // Maximum possible hand size in blackjack: 11 cards
     public static void main(String[] args) {
         
         //Dealer and Player
-        System.out.print("Dealer name:");
+        System.out.print("Dealer name: John");
         dealer.setName(s.nextLine());
         System.out.print("Dealer money:");
         bet.setDealerMoney(s.nextDouble());
@@ -34,16 +37,20 @@ public class Game {
         
         do {
             System.out.println("===================================");
+            
+            //Set betting
             System.out.print("Your bet: ");
             bet.setPlayerHandOneBet(s.nextDouble());
             System.out.print("Dealer bet: ");
             bet.setDealerHandBet(s.nextDouble());
             s.nextLine();
             
+            //Show player and dealer cards
             System.out.println("The dealer's card is "+getCard(dealer.getHand(0))+" [Value: "+dealer.getCardValue(dealer.getHand(0))+"]");
             try {Thread.sleep(500);} catch(InterruptedException e){}
             System.out.println("Your hand is "+Arrays.toString(p.getHandName())+" [Value: "+p.getHandValue()+"]");
             try {Thread.sleep(500);} catch(InterruptedException e){}
+            
             String choice;
             boolean isStand = false;
             
@@ -86,7 +93,7 @@ public class Game {
                     }
                     isStand = true;
                 } else if (choice.equalsIgnoreCase("split")) {
-                    if(p.isCardSplittable()) split(p);
+                    if(p.isCardSplittable()) split();
                     else System.out.println("Card is not splittable");
                 }
             }
@@ -110,10 +117,12 @@ public class Game {
             p.addToHand(d.giveCard(2));
             dealer.addToHand(d.giveCard(2));
         } while (!d.isEmpty());
+        
+        //Final result
         System.out.println("FINAL RESULT: ");
-        System.out.println("Dealer: "+dealer.getScore());
+        System.out.println("Dealer score: "+dealer.getScore());
         System.out.println("Dealer money: " + bet.getDealerMoney());
-        System.out.println("You: "+p.getScore());
+        System.out.println("Your score: "+p.getScore());
         System.out.println("Your money: " + bet.getPlayerMoney());
     }
     
@@ -135,8 +144,8 @@ public class Game {
         return name;
     }
     
-    private static void split(Player original) {
+    private static void split() {
         Player newHand = new Player(d.giveCard(2));
-        newHand.setName(original.getName());
+        newHand.setName(p.getName());
     }
 }

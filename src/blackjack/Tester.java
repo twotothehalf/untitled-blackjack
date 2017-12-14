@@ -45,7 +45,7 @@ public class Tester {
         /**
          * ROUND
          */
-        while(true) {
+        game: while(true) {
             System.out.println("===================================");
             
             //Dealer bet
@@ -66,10 +66,33 @@ public class Tester {
             
             //Player hand/s action
             for (int i = 1; i <= currentPlayerHand; i++) {
+                //Check if deck is empty the end game
+                if(d.isEmpty()) break game;
+                
                 playerAction(i);
             }
             
             //TODO: Show result
+            System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
+            for (int i = 0; i < currentPlayerHand; i++) {
+                System.out.println("Your hand: " + (i+1));
+                switch(currentStatus[i]) {
+                    case "bust-player":
+                        System.out.println("YOU BUST!");
+                        break;
+                    case "win-player":
+                        System.out.println("YOU WIN!");
+                        break;
+                    case "win-dealer":
+                        System.out.println("DEALER WIN!");
+                        break;
+                    case "tie":
+                        System.out.println("TIE!");
+                        break;
+                    default:
+                        break;
+                }
+            }
             
             //Distribute cards
             newRound();
@@ -88,9 +111,6 @@ public class Tester {
                 System.out.println("DEALER WIN THE GAME");
                 break;
             }
-            
-            //Check if deck is empty the end game
-            if(d.isEmpty()) break;
         }
         
         //Final result
@@ -150,7 +170,7 @@ public class Tester {
                 player[hand].addToHand(d.giveCard(1));
                 System.out.println("Your hand is "+Arrays.toString(player[hand].getHandName())+" [Value: "+player[hand].getHandValue()+"]");
                 if (player[hand].getHandValue() > 21) {
-                    System.out.println("You bust.");
+                    //System.out.println("You bust.");
                     player[0].addScore(1);
                     isStand = true;
                     bet.winRound(0);
@@ -159,21 +179,21 @@ public class Tester {
             } else if (choice.equalsIgnoreCase("stand")) {
                 System.out.println("You stand.");
                 System.out.println("Your hand's value is "+player[hand].getHandValue());
-                System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
+                //System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
                 if (player[hand].getHandValue() > player[0].getHandValue()) {
-                    System.out.println("You win this round.");
+                    //System.out.println("You win this round.");
                     player[hand].addScore(1);
                     bet.winRound(hand);
                     currentStatus[hand-1] = "win-player";
                 }
                 else if (player[0].getHandValue() > player[hand].getHandValue()) {
-                    System.out.println("Dealer wins this round.");
+                    //System.out.println("Dealer wins this round.");
                     player[0].addScore(1);
                     bet.winRound(0);
                     currentStatus[hand-1] = "win-dealer";
                 }
                 else {
-                    System.out.println("It's a tie.");
+                    //System.out.println("It's a tie.");
                     bet.winRound(-1);
                     currentStatus[hand-1] = "tie";
                 }

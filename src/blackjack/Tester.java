@@ -1,5 +1,8 @@
 package blackjack;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -12,9 +15,22 @@ public class Tester {
     static Player[] player = new Player[5];
     static int currentPlayerHand = 1;
     static String[] currentStatus = new String[4];
+    static Logging log = new Logging();
         
     // Maximum possible hand size in blackjack: 11 cards
     public static void main(String[] args) {
+        System.out.println(
+                "    ____  __           __     _            __  \n" +
+                "   / __ )/ /___ ______/ /__  (_)___ ______/ /__\n" +
+                "  / __  / / __ `/ ___/ //_/ / / __ `/ ___/ //_/\n" +
+                " / /_/ / / /_/ / /__/ ,<   / / /_/ / /__/ ,<   \n" +
+                "/_____/_/\\__,_/\\___/_/|_|_/ /\\__,_/\\___/_/|_|  \n" +
+                "                       /___/                   ");
+        
+        //Last game
+        System.out.println("\n-- Last game --");
+        log.readFile();
+        
         //Dealer setup
         player[0] = new Player(d.giveCard(2));
         System.out.print("Dealer name: ");
@@ -111,13 +127,20 @@ public class Tester {
                 break;
             }
         }
-        
-        //Final result
-        System.out.println("FINAL RESULT: ");
-        System.out.println("Dealer score: " + player[0].getScore());
-        System.out.println("Dealer money: " + bet.getDealerMoney());
-        System.out.println("Your score: " + player[1].getScore());
-        System.out.println("Your money: " + bet.getPlayerMoney());
+                
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        String data = "--------------------\r\n" +
+                    dateFormat.format(date) + "\r\n" +
+                    "Dealer: " + player[0].getName() + "\r\n" +
+                    "Dealer score: " + player[0].getScore() + "\r\n" +
+                    "Dealer money: " + bet.getDealerMoney()+ "\r\n" +
+                    "Player: " + player[1].getName() + "\r\n" +
+                    "Player score: " + player[1].getScore() + "\r\n" +
+                    "Player money: " + bet.getPlayerMoney() + "\r\n" +
+                    "--------------------\r\n";
+        System.out.println(data);
+        log.saveFile(data);
         
         s.nextLine();
         s.close();

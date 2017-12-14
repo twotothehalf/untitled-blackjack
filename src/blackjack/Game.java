@@ -3,13 +3,14 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 public class Game {
+    static Deck d = new Deck();
+    static Scanner s = new Scanner(System.in);
+    static Player dealer = new Player(d.giveCard(2));
+    static Player p = new Player(d.giveCard(2));
+    static Betting bet = new Betting();
+        
     // Maximum possible hand size in blackjack: 11 cards
     public static void main(String[] args) {
-        Deck d = new Deck();
-        Scanner s = new Scanner(System.in);
-        Player dealer = new Player(d.giveCard(2));
-        Player p = new Player(d.giveCard(2));
-        Betting bet = new Betting();
         
         //Dealer and Player
         System.out.print("Dealer name:");
@@ -85,7 +86,8 @@ public class Game {
                     }
                     isStand = true;
                 } else if (choice.equalsIgnoreCase("split")) {
-                    // PROBLEM: how to split?
+                    if(p.isCardSplittable()) split(p);
+                    else System.out.println("Card is not splittable");
                 }
             }
             System.out.println("Current money:");
@@ -95,9 +97,11 @@ public class Game {
             
             //Check if both dealer and player has money to bet
             if(bet.getDealerMoney() <= 0) {
+                System.out.println("***************************");
                 System.out.println("YOU WIN THE GAME");
                 break;
             } else if(bet.getPlayerMoney() <= 0) {
+                System.out.println("***************************");
                 System.out.println("DEALER WIN THE GAME");
                 break;
             }
@@ -129,5 +133,10 @@ public class Game {
             case 3: name+="♠"; break;
         }
         return name;
+    }
+    
+    private static void split(Player original) {
+        Player newHand = new Player(d.giveCard(2));
+        newHand.setName(original.getName());
     }
 }

@@ -107,7 +107,7 @@ public class Betting {
         this.playerHandTwoBet = 0.0;
         this.dealerHandBet = 0.0;
     }
-    
+   
     public void winRound(int hand) {
         
         if(hand >= 1 && hand <= 4) {

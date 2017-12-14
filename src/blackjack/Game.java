@@ -16,14 +16,14 @@ public class Game {
     public static void main(String[] args) {
         
         //Dealer and Player
-        System.out.print("Dealer name: John");
+        System.out.print("Dealer name: ");
         dealer.setName(s.nextLine());
-        System.out.print("Dealer money:");
+        System.out.print("Dealer money: ");
         bet.setDealerMoney(s.nextDouble());
         s.nextLine();
-        System.out.print("Player name:");
+        System.out.print("Player name: ");
         p.setName(s.nextLine());
-        System.out.print("Player money:");
+        System.out.print("Player money: ");
         bet.setPlayerMoney(s.nextDouble());
         s.nextLine();
         

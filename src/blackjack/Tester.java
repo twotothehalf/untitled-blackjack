@@ -71,7 +71,7 @@ public class Tester {
                 playerAction(i);
             }
             
-            //TODO: Show result
+            //Show result
             System.out.println("\nThe dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
             for (int i = 0; i < currentPlayerHand; i++) {
                 System.out.println("Your hand: " + (i+1));
@@ -118,6 +118,9 @@ public class Tester {
         System.out.println("Dealer money: " + bet.getDealerMoney());
         System.out.println("Your score: " + player[1].getScore());
         System.out.println("Your money: " + bet.getPlayerMoney());
+        
+        s.nextLine();
+        s.close();
     }
     
     private static String getCard(int n) {
@@ -170,7 +173,6 @@ public class Tester {
                 player[hand].addToHand(d.giveCard(1));
                 System.out.println("Your hand is "+Arrays.toString(player[hand].getHandName())+" [Value: "+player[hand].getHandValue()+"]");
                 if (player[hand].getHandValue() > 21) {
-                    //System.out.println("You bust.");
                     System.out.println("Player bet - " + bet.getPlayerBet());
                     player[0].addScore(1);
                     isStand = true;
@@ -180,23 +182,19 @@ public class Tester {
             } else if (choice.equalsIgnoreCase("stand")) {
                 System.out.println("You stand.");
                 System.out.println("Your hand's value is "+player[hand].getHandValue());
-                //System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
                 if (player[hand].getHandValue() > player[0].getHandValue()) {
-                    //System.out.println("You win this round.");
                     System.out.println("Player bet - " + bet.getPlayerBet());
                     player[hand].addScore(1);
                     bet.winRound(hand);
                     currentStatus[hand-1] = "win-player";
                 }
                 else if (player[0].getHandValue() > player[hand].getHandValue()) {
-                    //System.out.println("Dealer wins this round.");
                     System.out.println("Player bet - " + bet.getPlayerBet());
                     player[0].addScore(1);
                     bet.winRound(0);
                     currentStatus[hand-1] = "win-dealer";
                 }
                 else {
-                    //System.out.println("It's a tie.");
                     System.out.println("Player bet - " + bet.getPlayerBet());
                     bet.winRound(-1);
                     currentStatus[hand-1] = "tie";

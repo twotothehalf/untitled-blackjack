@@ -222,6 +222,17 @@ public class Tester {
         player[currentPlayerHand] = new Player(d.giveCard(2));
         player[currentPlayerHand].setName(player[1].getName());
         bet.setPlayerBet(bet.getPlayerBet(0), currentPlayerHand);
-        playerAction(currentPlayerHand);
+        
+        /**
+         * Distributing cards
+         */
+        
+        //Current hand
+        int currentCard = player[currentPlayerHand-1].getHand(0);
+        player[currentPlayerHand-1].setHand(1, d.giveCard(1)[0]);
+        
+        //New hand
+        player[currentPlayerHand].setHand(0, currentCard);
+        player[currentPlayerHand].setHand(1, d.giveCard(1)[0]);
     }
 }

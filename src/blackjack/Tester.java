@@ -25,6 +25,8 @@ public class Tester {
 
         //Player setup
         player[1] = new Player(d.giveCard(2));
+        //int[] exampleCard = {4,4}; //SPLIT TESTING
+        //player[1] = new Player(exampleCard); //SPLIT TESTING
         System.out.print("Player name: ");
         player[1].setName(s.nextLine());
         System.out.print("Player money: ");
@@ -55,11 +57,8 @@ public class Tester {
             
             // Player bet
             System.out.printf("\nYour bet: ");
-            bet.setPlayerBet(s.nextDouble(), 1);
+            bet.setPlayerBet(s.nextDouble());
             s.nextLine();
-            for (int i = 1; i <= currentPlayerHand; i++) {
-                bet.setPlayerBet(bet.getPlayerBet(1), i);
-            }
             
             //Show current dealer and player hand/s card
             showCards();
@@ -73,7 +72,7 @@ public class Tester {
             }
             
             //TODO: Show result
-            System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
+            System.out.println("\nThe dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
             for (int i = 0; i < currentPlayerHand; i++) {
                 System.out.println("Your hand: " + (i+1));
                 switch(currentStatus[i]) {
@@ -159,6 +158,7 @@ public class Tester {
         // choice loop: repeat until player calls stand.
         while (!isStand) {
             while (true) {
+                System.out.printf("\nYour hand - %d is %s with value: %d\n", hand, Arrays.toString(player[hand].getHandName()), player[hand].getHandValue());
                 System.out.print("Do you Hit, Stand or Split? ");
                 choice = s.nextLine();
                 if (choice.equalsIgnoreCase("hit") || choice.equalsIgnoreCase("stand") || choice.equalsIgnoreCase("split")) break;
@@ -171,6 +171,7 @@ public class Tester {
                 System.out.println("Your hand is "+Arrays.toString(player[hand].getHandName())+" [Value: "+player[hand].getHandValue()+"]");
                 if (player[hand].getHandValue() > 21) {
                     //System.out.println("You bust.");
+                    System.out.println("Player bet - " + bet.getPlayerBet());
                     player[0].addScore(1);
                     isStand = true;
                     bet.winRound(0);
@@ -182,18 +183,21 @@ public class Tester {
                 //System.out.println("The dealer's hand is "+Arrays.toString(player[0].getHandName())+" [Value: "+player[0].getHandValue()+"]");
                 if (player[hand].getHandValue() > player[0].getHandValue()) {
                     //System.out.println("You win this round.");
+                    System.out.println("Player bet - " + bet.getPlayerBet());
                     player[hand].addScore(1);
                     bet.winRound(hand);
                     currentStatus[hand-1] = "win-player";
                 }
                 else if (player[0].getHandValue() > player[hand].getHandValue()) {
                     //System.out.println("Dealer wins this round.");
+                    System.out.println("Player bet - " + bet.getPlayerBet());
                     player[0].addScore(1);
                     bet.winRound(0);
                     currentStatus[hand-1] = "win-dealer";
                 }
                 else {
                     //System.out.println("It's a tie.");
+                    System.out.println("Player bet - " + bet.getPlayerBet());
                     bet.winRound(-1);
                     currentStatus[hand-1] = "tie";
                 }
@@ -221,7 +225,6 @@ public class Tester {
         ++currentPlayerHand;
         player[currentPlayerHand] = new Player(d.giveCard(2));
         player[currentPlayerHand].setName(player[1].getName());
-        bet.setPlayerBet(bet.getPlayerBet(0), currentPlayerHand);
         
         /**
          * Distributing cards

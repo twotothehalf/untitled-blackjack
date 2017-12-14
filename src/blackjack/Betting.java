@@ -8,14 +8,14 @@ public class Betting {
     private double playerHandTwoBet;
     private double playerHandThreeBet;
     private double playerHandFourBet;
-    private double[] playerBet = new double[4];
-    
-    public double getPlayerBet(int hand) {
-        return playerBet[hand];
+    private double playerBet;
+
+    public double getPlayerBet() {
+        return playerBet;
     }
 
-    public void setPlayerBet(double playerBet, int hand) {
-        this.playerBet[hand] = playerBet;
+    public void setPlayerBet(double playerBet) {
+        this.playerBet = playerBet;
     }
     
     public double getDealerMoney() {
@@ -111,8 +111,8 @@ public class Betting {
     public void winRound(int hand) {
         
         if(hand >= 1 && hand <= 4) {
-            this.playerMoney += this.playerBet[hand];
-            this.dealerMoney -= this.playerBet[hand];
+            this.playerMoney += this.playerBet;
+            this.dealerMoney -= this.playerBet;
         } else if (hand == 0) {
             this.dealerMoney += this.dealerHandBet;
             this.playerMoney -= this.dealerHandBet;

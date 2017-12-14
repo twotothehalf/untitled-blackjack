@@ -8,7 +8,16 @@ public class Betting {
     private double playerHandTwoBet;
     private double playerHandThreeBet;
     private double playerHandFourBet;
+    private double[] playerBet = new double[4];
+    
+    public double getPlayerBet(int hand) {
+        return playerBet[hand];
+    }
 
+    public void setPlayerBet(double playerBet, int hand) {
+        this.playerBet[hand] = playerBet;
+    }
+    
     public double getDealerMoney() {
         return dealerMoney;
     }
@@ -98,9 +107,24 @@ public class Betting {
         this.playerHandTwoBet = 0.0;
         this.dealerHandBet = 0.0;
     }
+    
+    public void winRound(int hand) {
+        
+        if(hand >= 1 && hand <= 4) {
+            this.playerMoney += this.playerBet[hand];
+            this.dealerMoney -= this.playerBet[hand];
+        } else if (hand == 0) {
+            this.dealerMoney += this.dealerHandBet;
+            this.playerMoney -= this.dealerHandBet;
+        }
+        
+        this.playerHandOneBet = 0.0;
+        this.playerHandTwoBet = 0.0;
+        this.dealerHandBet = 0.0;
+    }
 
     @Override
     public String toString() {
         return "Betting{" + "dealerMoney=" + dealerMoney + ", playerMoney=" + playerMoney + '}';
-    }    
+    }  
 }

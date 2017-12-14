@@ -1,25 +1,20 @@
 package blackjack;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Logging {
-    private final String FILE_LOCATION = "c:/blackjack.txt";    
+    private final String FILE_LOCATION = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "blackjack.txt";    
     PrintWriter pw;
     Scanner s;
-
-    public Logging() {
-        try {
-            pw = new PrintWriter(new FileOutputStream(this.FILE_LOCATION));
-            s = new Scanner(new FileInputStream(this.FILE_LOCATION));
-        } catch(Exception e) {System.out.println(e.getMessage());}
-    }
        
     public void saveFile(String data) {
         try {
-            pw.write(data);
+            pw = new PrintWriter(new FileOutputStream(this.FILE_LOCATION));
+            pw.println(data);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -29,6 +24,7 @@ public class Logging {
     
     public void readFile() {
         try {
+            s = new Scanner(new FileInputStream(this.FILE_LOCATION));
             while(s.hasNextLine()) {
                 System.out.println(s.nextLine());
             }

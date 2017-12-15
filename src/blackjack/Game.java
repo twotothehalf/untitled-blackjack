@@ -71,9 +71,18 @@ public class Game {
             bet.setDealerHandBet(dealerBet);
             
             // Player bet
-            System.out.printf("\nYour bet: ");
-            bet.setPlayerBet(s.nextDouble());
-            s.nextLine();
+            while(true) {
+                System.out.print("\nYour bet: ");
+                int playerBet = s.nextInt();
+                s.nextLine();
+                
+                if(bet.isBettable(playerBet, "player")) {
+                    bet.setPlayerBet(playerBet);
+                    break;
+                } else {
+                    System.out.print("Your bet is greater than your money. Please reenter your bet");
+                }
+            }
             
             //Show current dealer and player hand/s card
             showCards();

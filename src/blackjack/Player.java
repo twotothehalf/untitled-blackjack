@@ -97,7 +97,7 @@ public class Player {
         this.name = name;
     }
     
-    public boolean isCardSplittable() {
-        return this.hand[0] == this.hand[1];
+    public boolean isCardSplittable() {        
+        return this.hand[0]-this.hand[1] == 0 || this.hand[0]-this.hand[1] == -13;
     }
 }

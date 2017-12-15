@@ -65,6 +65,9 @@ public class Game {
         game: while(true) {
             System.out.println("===================================");
             
+            //Check if deck is empty the end game
+            if(d.isEmpty()) break game;
+            
             //Dealer bet
             int dealerBet = 1 + r.nextInt((int)bet.getDealerMoney());
             System.out.print("Dealer bet: " + dealerBet);
@@ -88,10 +91,7 @@ public class Game {
             showCards();
             
             //Player hand/s action
-            for (int i = 1; i <= currentPlayerHand; i++) {
-                //Check if deck is empty the end game
-                if(d.isEmpty()) break game;
-                
+            for (int i = 1; i <= currentPlayerHand; i++) {                
                 playerAction(i);
             }
             
@@ -149,6 +149,15 @@ public class Game {
                     "--------------------\r\n";
         System.out.println(data);
         log.saveFile(data);
+        
+        System.out.println("You want to replay the game?");
+        Scanner choice = new Scanner(System.in);
+        if(choice.nextLine().equalsIgnoreCase("Y")) {
+            String[] a = {""};
+            d = new Deck();
+            main(a);
+            choice.close();
+        }
         
         s.nextLine();
         s.close();

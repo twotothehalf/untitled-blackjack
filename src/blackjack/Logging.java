@@ -2,6 +2,7 @@ package blackjack;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -23,15 +24,23 @@ public class Logging {
     }
     
     public void readFile() {
-        try {
-            s = new Scanner(new FileInputStream(this.FILE_LOCATION));
-            while(s.hasNextLine()) {
-                System.out.println(s.nextLine());
+        File file = new File(this.FILE_LOCATION);
+        
+        if(file.exists()) {
+            System.out.println("\n\n-- Last game --");
+            try {
+                s = new Scanner(new FileInputStream(file));
+                while(s.hasNextLine()) {
+                    System.out.println(s.nextLine());
+                }
+            } catch(FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                s.close();
             }
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            s.close();
-        }
+        }        
+        
     }
 }

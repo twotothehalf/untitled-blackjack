@@ -135,7 +135,10 @@ public class Game {
                 break;
             }
         }
-                
+        
+        /**
+         * Output result and login
+         */
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date = new Date();
         String data = "--------------------\r\n" +
@@ -150,11 +153,15 @@ public class Game {
         System.out.println(data);
         log.saveFile(data);
         
+        /**
+         * Replay game
+         */
         System.out.println("You want to replay the game?");
         Scanner choice = new Scanner(System.in);
         if(choice.nextLine().equalsIgnoreCase("Y")) {
             String[] a = {""};
             d = new Deck();
+            //Recursion
             main(a);
             choice.close();
         }
@@ -251,6 +258,9 @@ public class Game {
         System.out.println("Current money:");
         System.out.println(bet.toString());
         
+        /**
+         * Clear current cards in hand
+         */
         for (int i = 0; i <= currentPlayerHand; i++) {
             player[i].clearHand();
             player[i].addToHand(d.giveCard(2));

@@ -28,7 +28,6 @@ public class Game {
                 "                       /___/                   ");
         
         //Last game
-        System.out.println("\n-- Last game --");
         log.readFile();
         
         //Dealer setup

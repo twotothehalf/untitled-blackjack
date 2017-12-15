@@ -41,7 +41,7 @@ public class Game {
 
         //Player setup
         player[1] = new Player(d.giveCard(2));
-        //int[] exampleCard = {4,4}; //SPLIT TESTING
+        //int[] exampleCard = {4,17}; //SPLIT TESTING
         //player[1] = new Player(exampleCard); //SPLIT TESTING
         System.out.print("Player name: ");
         player[1].setName(s.nextLine());

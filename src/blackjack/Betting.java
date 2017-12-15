@@ -4,10 +4,6 @@ public class Betting {
     private double dealerMoney;
     private double playerMoney;
     private double dealerHandBet;
-    private double playerHandOneBet;
-    private double playerHandTwoBet;
-    private double playerHandThreeBet;
-    private double playerHandFourBet;
     private double playerBet;
 
     public double getPlayerBet() {
@@ -42,38 +38,6 @@ public class Betting {
         this.dealerHandBet = dealerHandBet;
     }
 
-    public double getPlayerHandOneBet() {
-        return playerHandOneBet;
-    }
-
-    public void setPlayerHandOneBet(double playerHandOneBet) {
-        this.playerHandOneBet = playerHandOneBet;
-    }
-
-    public double getPlayerHandTwoBet() {
-        return playerHandTwoBet;
-    }
-
-    public void setPlayerHandTwoBet(double playerHandTwoBet) {
-        this.playerHandTwoBet = playerHandTwoBet;
-    }
-
-    public double getPlayerHandThreeBet() {
-        return playerHandThreeBet;
-    }
-
-    public void setPlayerHandThreeBet(double playerHandThreeBet) {
-        this.playerHandThreeBet = playerHandThreeBet;
-    }
-
-    public double getPlayerHandFourBet() {
-        return playerHandFourBet;
-    }
-
-    public void setPlayerHandFourBet(double playerHandFourBet) {
-        this.playerHandFourBet = playerHandFourBet;
-    }
-    
     public boolean isBettable(int betAmount, String who) {
         if(who == "player") {
             return betAmount < this.playerMoney;
@@ -85,29 +49,6 @@ public class Betting {
         }
     }
     
-    public void winRound(String hand) {
-        if(hand.equalsIgnoreCase("playerOne")) {
-             this.playerMoney += this.playerHandOneBet;
-             this.dealerMoney -= this.playerHandOneBet;
-        } else if(hand.equalsIgnoreCase("playerTwo")) {
-             this.playerMoney += this.playerHandTwoBet;
-             this.dealerMoney -= this.playerHandTwoBet;
-        } else if(hand.equalsIgnoreCase("playerThree")) {
-             this.playerMoney += this.playerHandThreeBet;
-             this.dealerMoney -= this.playerHandThreeBet;
-        } else if(hand.equalsIgnoreCase("playerFour")) {
-             this.playerMoney += this.playerHandFourBet;
-             this.dealerMoney -= this.playerHandFourBet;
-        } else if (hand.equalsIgnoreCase("dealer")) {
-             this.dealerMoney += this.dealerHandBet;
-             this.playerMoney -= this.dealerHandBet;
-        }
-        
-        this.playerHandOneBet = 0.0;
-        this.playerHandTwoBet = 0.0;
-        this.dealerHandBet = 0.0;
-    }
-   
     public void winRound(int hand) {
         
         if(hand >= 1 && hand <= 4) {
@@ -118,8 +59,7 @@ public class Betting {
             this.playerMoney -= this.dealerHandBet;
         }
         
-        this.playerHandOneBet = 0.0;
-        this.playerHandTwoBet = 0.0;
+        this.playerBet = 0.0;
         this.dealerHandBet = 0.0;
     }
 
